@@ -11,7 +11,18 @@ import static com.codeborne.selenide.Selenide.open;
 
 class CardOrderTest {
     @Test
-    void shoulTestIfNameEmpty() {
+    void shouldTest() {
+        //Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        SelenideElement form = $(".form");
+        form.$("[data-test-id=name] input").setValue("Александр");
+        form.$("[data-test-id=phone] input").setValue("+79222161614");
+        form.$("[data-test-id=agreement]").click();
+        form.$(".button").click();
+        $("[data-test-id=order-success]").shouldHave(Condition.exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+    }
+    @Test
+    void shouldTestIfNameEmpty() {
         open("http://localhost:9999");
         SelenideElement form = $(".form");
         form.$("[data-test-id=name] input").setValue("");
@@ -22,7 +33,7 @@ class CardOrderTest {
     }
 
     @Test
-    void shoulTestIfPhoneEmpty() {
+    void shouldTestIfPhoneEmpty() {
         open("http://localhost:9999");
         SelenideElement form = $(".form");
         form.$("[data-test-id=name] input").setValue("Александр");
@@ -43,7 +54,7 @@ class CardOrderTest {
     }
 
     @Test
-    void shoulTestIfNameInvalid() {
+    void shouldTestIfNameInvalid() {
         open("http://localhost:9999");
         SelenideElement form = $(".form");
         form.$("[data-test-id=name] input").setValue("Aleksandr");
@@ -54,7 +65,7 @@ class CardOrderTest {
     }
 
     @Test
-    void shoulTestIfPhoneInvalid() {
+    void shouldTestIfPhoneInvalid() {
         open("http://localhost:9999");
         SelenideElement form = $(".form");
         form.$("[data-test-id=name] input").setValue("Александр");
